@@ -13,11 +13,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 const bot = new Telegraf(process.env.BOT_TOKEN || '');
 
-bot.telegram.setWebhook(
-  `${process.env.HEROKU_APP_URL}/bot${process.env.BOT_TOKEN}`
-);
+// bot.telegram.setWebhook(
+//   `${process.env.HEROKU_APP_URL}/bot${process.env.BOT_TOKEN}`
+// );
 // @ts-ignore
-bot.startWebhook(`/bot${process.env.BOT_TOKEN}`, null, process.env.PORT);
+// bot.startWebhook(`/bot${process.env.BOT_TOKEN}`, null, process.env.PORT);
 
 bot.start((ctx) =>
   ctx.reply(
@@ -76,7 +76,12 @@ bot.on('text', (ctx) => {
   }
 });
 
-bot.launch();
+bot.launch({
+  webhook: {
+    domain: process.env.HEROKU_APP_URL,
+    port: Number(process.env.PORT),
+  },
+});
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
