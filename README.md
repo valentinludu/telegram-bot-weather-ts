@@ -2,7 +2,7 @@
 
 A telegram weather bot to check the weather using only your city name.
 
-This bot was built with nodejs, telegraf and axios.
+This bot was built with typescript, nodejs, telegraf and axios.
 
 Hosted on Heroku.
 
