@@ -53,12 +53,8 @@ bot.action(welcomeActions, (ctx) => {
 
 bot.help((ctx) => {
   return ctx.reply(
-    'Here is a full list of available actions:\n/start - start from the beginning\n/quit - leave chat'
+    'Here is a full list of available actions:\n/start - start from the beginning'
   );
-});
-
-bot.command('quit', (ctx) => {
-  ctx.leaveChat();
 });
 
 bot.on('text', (ctx) => {
