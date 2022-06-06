@@ -1,0 +1,32 @@
+{
+  "name": "telegram-weather-bot",
+  "description": "Telegram weather bot",
+  "scripts": {
+    "lint": "eslint .",
+    "start:dev": "nodemon ./dist/index.js",
+    "start": "node ./dist/index.js",
+    "build": "tsc"
+  },
+  "main": "dist/index.ts",
+  "keywords": [
+    "telegraf weather bot",
+    "telegram weather bot"
+  ],
+  "engines": {
+    "node": "16"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "telegraf": "^4.8.3"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^17.0.40",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "nodemon": "^2.0.16",
+    "typegram": "^3.9.2",
+    "typescript": "^4.7.3"
+  }
+}
