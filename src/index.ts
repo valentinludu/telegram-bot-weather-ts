@@ -13,6 +13,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 const bot = new Telegraf(process.env.BOT_TOKEN || '');
 
+bot.telegram.setWebhook(
+  `${process.env.HEROKU_APP_URL}/bot${process.env.BOT_TOKEN}`
+);
+// @ts-ignore
+bot.startWebhook(`/bot${process.env.BOT_TOKEN}`, null, process.env.PORT);
+
 bot.start((ctx) =>
   ctx.reply(
     'Welcome stranger. This is a bot specially build for you to see your current weather. \n\nType /help to see all the available actions. \n\nType a city name or click on a predefined city below:',
@@ -47,8 +53,12 @@ bot.action(welcomeActions, (ctx) => {
 
 bot.help((ctx) => {
   return ctx.reply(
-    'Here is a full list of available actions:\n/start - start from the beginning'
+    'Here is a full list of available actions:\n/start - start from the beginning\n/quit - leave chat'
   );
+});
+
+bot.command('quit', (ctx) => {
+  ctx.leaveChat();
 });
 
 bot.on('text', (ctx) => {
@@ -70,12 +80,7 @@ bot.on('text', (ctx) => {
   }
 });
 
-bot.launch({
-  webhook: {
-    domain: `${process.env.HEROKU_APP_URL}/bot${process.env.BOT_TOKEN}`,
-    port: Number(process.env.PORT),
-  },
-});
+bot.launch();
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
